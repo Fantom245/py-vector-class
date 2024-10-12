@@ -2,25 +2,25 @@ from math import sqrt, acos, degrees, cos, sin, radians
 
 
 class Vector:
-    def __init__(self, x: float, y: float) -> None:
-        self.x = round(x, 2)
-        self.y = round(y, 2)
+    def __init__(self, coord_x: float, coord_y: float) -> None:
+        self.x = round(coord_x, 2)
+        self.y = round(coord_y, 2)
 
     def __add__(self, other: int | float) -> "Vector":
         if isinstance(other, Vector):
-            return Vector(x=self.x + other.x, y=self.y + other.y)
+            return Vector(self.x + other.x, self.y + other.y)
         else:
             return NotImplemented
 
     def __sub__(self, other: int | float) -> "Vector":
         if isinstance(other, Vector):
-            return Vector(x=self.x - other.x, y=self.y - other.y)
+            return Vector(self.x - other.x, self.y - other.y)
         else:
             NotImplemented
 
     def __mul__(self, other: int | float) -> "Vector":
         if isinstance(other, (int, float)):
-            return Vector(x=self.x * other, y=self.y * other)
+            return Vector(self.x * other, self.y * other)
         elif isinstance(other, Vector):
             return (self.x * other.x) + (self.y * other.y)
 
@@ -38,8 +38,8 @@ class Vector:
 
     def get_normalized(self) -> float:
         return Vector(
-            x=self.x / sqrt(self.x ** 2 + self.y ** 2),
-            y=self.y / sqrt(self.x ** 2 + self.y ** 2)
+            self.x / sqrt(self.x ** 2 + self.y ** 2),
+            self.y / sqrt(self.x ** 2 + self.y ** 2)
         )
 
     def angle_between(self, vector: "Vector") -> int:
@@ -56,6 +56,6 @@ class Vector:
     def rotate(self, degrees: float | int) -> "Vector":
         radians_angle = radians(degrees)
         return Vector(
-            x=(cos(radians_angle) * self.x) - (sin(radians_angle) * self.y),
-            y=(sin(radians_angle) * self.x) + (cos(radians_angle) * self.y)
+            (cos(radians_angle) * self.x) - (sin(radians_angle) * self.y),
+            (sin(radians_angle) * self.x) + (cos(radians_angle) * self.y)
         )
